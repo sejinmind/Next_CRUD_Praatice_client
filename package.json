@@ -1,0 +1,23 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "cross-env NODE_PATH=src next dev",
+    "build": "cross-env NODE_PATH=src next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "12.0.10",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.1",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}
