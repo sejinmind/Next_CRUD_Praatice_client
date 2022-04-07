@@ -8,7 +8,7 @@ export default class AppHeader extends React.Component {
     super(props);
     this.state = {
       title: null,
-      description: null,
+      subTitle: null,
     };
   }
 
@@ -16,8 +16,8 @@ export default class AppHeader extends React.Component {
     const { pathname } = this.context;
     Routes.map((Route) => {
       if (Route.pathname === pathname) {
-        const { title, description } = Route;
-        this.setState({ title, description });
+        const { title, subTitle } = Route;
+        this.setState({ title, subTitle });
       }
     });
   }
@@ -31,18 +31,17 @@ export default class AppHeader extends React.Component {
         className="site-layout-background"
         style={{
           padding: 0,
-          background: "#fff",
           display: "flex",
           justifyContent: "space-between",
+          background: "#fff",
         }}
       >
         <PageHeader
           className="site-page-header"
           onBack={() => this.context.back()}
-          title={this.title}
-          subTitle={this.description}
+          title={this.state.title}
+          subTitle={this.state.subTitle}
         />
-        {/* <Input /> */}
       </Layout.Header>
     );
   }
