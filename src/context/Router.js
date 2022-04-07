@@ -10,7 +10,7 @@ class Router extends React.Component {
   }
   render() {
     return (
-      <RouterContext.Provider value={this}>
+      <RouterContext.Provider value={this.props.router}>
         {this.props.children}
       </RouterContext.Provider>
     );
