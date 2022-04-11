@@ -1,28 +1,97 @@
+import { observable, action, makeObservable, toJS } from 'mobx'
+import {
+	GET_BOARD_LIST_QUERY,
+	GET_BOARD_DETAIL_MUTATION,
+	ADD_ARTICLE_MUTATION,
+	DELETE_ARTICLE_MUTATION,
+} from '../shared'
 export class BoardListModel {
-  constructor() {}
-  static getBoardDatas() {
-    return [
-      {
-        key: "1",
-        name: "John Brown",
-        age: 32,
-        address: "New York No. 1 Lake Park",
-        tags: ["nice", "developer"],
-      },
-      {
-        key: "2",
-        name: "Jim Green",
-        age: 42,
-        address: "London No. 1 Lake Park",
-        tags: ["loser"],
-      },
-      {
-        key: "3",
-        name: "Joe Black",
-        age: 32,
-        address: "Sidney No. 1 Lake Park",
-        tags: ["cool", "teacher"],
-      },
-    ];
-  }
+	constructor() {
+		this.boardList = []
+		this.loading = true
+		makeObservable(this, {
+			isLoadng: action,
+			loading: observable,
+			boardList: observable,
+			getBoardList: action,
+			getList: action,
+			getOne: action,
+			getBoardDetail: action,
+			addArticle: action,
+			deleteArticle: action,
+		})
+	}
+	isLoadng() {}
+	getList = (client) => {
+		const result = client.query({
+			query: GET_BOARD_LIST_QUERY,
+		})
+		return result
+	}
+
+	getBoardList = async (client) => {
+		try {
+			const result = await this.getList(client)
+			const data = result.data.getBoardList
+			this.boardList.replace(data)
+			return this.boardList
+		} catch (error) {
+			console.log('Failed to getBoardList')
+			throw error
+		}
+	}
+
+	getOne = (client) => {
+		const result = client.query({
+			query: GET_BOARD_DETAIL_MUTATION,
+		})
+		return result
+	}
+
+	getBoardDetail = async (_id, client) => {
+		try {
+			this.getBoardList(client)
+			const result = toJS(this.boardList).filter((item) => item._id === _id)
+			console.log(result, _id)
+			return result
+		} catch (error) {
+			console.log('Failed to getBoardList')
+			throw error
+		}
+	}
+	addArticle = async (state, client) => {
+		try {
+			const result = await client.mutate({
+				mutation: ADD_ARTICLE_MUTATION,
+				variables: {
+					author: state.author,
+					title: state.title,
+					isRemove: false,
+				},
+			})
+			console.log('before')
+			console.log(this.boardList)
+			this.boardList.push(result.data.addArticle)
+			console.log('after')
+			console.log(this.boardList)
+		} catch (error) {
+			console.log('Failed to getBoardList')
+			throw error
+		}
+	}
+	deleteArticle = async (_id, client) => {
+		try {
+			const result = await client.mutate({
+				mutation: DELETE_ARTICLE_MUTATION,
+				variables: {
+					_id,
+				},
+			})
+			const targetId = result.data.deleteArticle._id
+			this.boardList.replace(this.boardList.filter((list) => list._id !== targetId))
+		} catch (error) {
+			console.log('Failed to Delete Article')
+			throw error
+		}
+	}
 }
