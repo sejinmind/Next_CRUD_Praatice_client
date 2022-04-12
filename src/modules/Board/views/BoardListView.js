@@ -5,11 +5,13 @@ import { observer } from 'mobx-react'
 import Link from 'next/link'
 
 import { QuestionCircleOutlined } from '@ant-design/icons'
+import Search from 'components/Search'
 
 @observer
 export class BoardListView extends React.Component {
 	constructor(props) {
 		super(props)
+		this.state = { data: props.data }
 	}
 
 	render() {
@@ -60,9 +62,11 @@ export class BoardListView extends React.Component {
 			},
 		]
 		const { data } = this.props
+		const setState = this.setState.bind(this)
 		return (
 			<React.Fragment>
-				<Table columns={columns} dataSource={toJS(data)} rowKey="_id" />
+				<Search placeholder="검색해주세요" data={data} setData={setState} />
+				<Table columns={columns} dataSource={toJS(this.state.data)} rowKey="_id" />
 			</React.Fragment>
 		)
 	}

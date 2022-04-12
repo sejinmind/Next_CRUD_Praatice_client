@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Layout, PageHeader, Avatar, Typography } from 'antd'
+import { Layout, PageHeader, Avatar, Typography, Button } from 'antd'
 import { useRouter } from 'next/router'
 import { Routes } from 'constant/Routes'
 import { AuthContext } from 'context'
@@ -25,7 +25,7 @@ export default function AppHeader() {
 	}, [router.pathname])
 
 	return (
-		<Layout.Header
+		<LayoutHeader
 			className="site-layout-background"
 			style={{
 				padding: 0,
@@ -36,7 +36,7 @@ export default function AppHeader() {
 			}}>
 			<PageHeader
 				className="site-page-header"
-				// onBack={() => this.context.back()}
+				onBack={() => router.back()}
 				title={pageHeader.title}
 				subTitle={pageHeader.subTitle}
 			/>
@@ -46,11 +46,20 @@ export default function AppHeader() {
 					<Typography.Text>{user.username}</Typography.Text>
 				</AvatarContainer>
 			) : (
-				'로그아웃상태'
+				<AvatarContainer>
+					<Button type="primary" onClick={() => router.push('/signIn')}>
+						로그인
+					</Button>
+				</AvatarContainer>
 			)}
-		</Layout.Header>
+		</LayoutHeader>
 	)
 }
+const LayoutHeader = styled(Layout.Header)`
+	.site-page-header {
+		padding: 12px 24px;
+	}
+`
 const AvatarContainer = styled.div`
 	margin: 0 25px;
 	.ant-avatar {
