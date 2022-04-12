@@ -16,10 +16,8 @@ export const SignInViewController = ({ viewModel }) => {
 		const { username, password } = state
 		const response = await viewModel.handleSignIn(username, password)
 		if (response === 'ok') {
-			message.loading('로그인중...', 2.5).then(() => {
-				router.back()
-				message.success('로그인 성공!', 2.5)
-			})
+			router.back()
+			message.success('로그인 성공!', 2.5)
 		}
 	}
 	return (
