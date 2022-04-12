@@ -31,9 +31,7 @@ const AppSider = observer(() => {
 							<Menu.Item key="2" onClick={() => SignOutAction()}>
 								로그아웃
 							</Menu.Item>
-							<Menu.Item key="3" onClick={() => SignOutAction()}>
-								마이페이지
-							</Menu.Item>
+							<Menu.Item key="3">마이페이지</Menu.Item>
 						</React.Fragment>
 					) : (
 						<React.Fragment>
