@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Input } from 'antd'
+import { Input, Form } from 'antd'
 import styled from '@emotion/styled'
 import { SearchOutlined } from '@ant-design/icons'
 
@@ -21,15 +21,18 @@ export default function Search(props) {
 	}
 	const onChange = (e) => {
 		setText(e.target.value)
+		onFinish()
 	}
 	return (
 		<SearchContainer backgroundColor={props.backgroundColor}>
-			<Input
-				placeholder={props.placeholder ? props.placeholder : '검색해주세요'}
-				bordered={false}
-				onChange={onChange}
-				addonAfter={<SearchOutlined onClick={onFinish} />}
-			/>
+			<Form onFinish={onFinish}>
+				<Input
+					placeholder={props.placeholder ? props.placeholder : '검색해주세요'}
+					bordered={false}
+					onChange={onChange}
+					addonAfter={<SearchOutlined onClick={onFinish} />}
+				/>
+			</Form>
 		</SearchContainer>
 	)
 }
