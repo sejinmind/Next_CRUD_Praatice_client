@@ -46,5 +46,6 @@ export class AuthModel {
 
 	handleSignOut = () => {
 		this.isLoggedIn = false
+		window.localStorage.removeItem('accessToken')
 	}
 }
