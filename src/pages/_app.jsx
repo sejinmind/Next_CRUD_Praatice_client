@@ -17,31 +17,25 @@ const boardRootStore = new BoardRootStore()
 import { ApolloProvider } from 'react-apollo'
 import { client } from 'config/apolloClientConfig'
 
-export default class MyApp extends App {
-	constructor(props) {
-		super(props)
-	}
+export default function MyApp(props) {
+	const BoardProvier = Provider
+	const { Component, pageProps } = props
 
-	render() {
-		const BoardProvier = Provider
-		const { Component, pageProps } = this.props
-
-		return (
-			<ApolloProvider client={client}>
-				<RouterProvider>
-					<AuthProvider {...authRootStore.getStores()}>
-						<BoardProvier {...boardRootStore.getStores()}>
-							<AppLayout>
-								<Component
-									authViewModel={authRootStore.getStores('authModels').authModel}
-									client={client}
-									{...pageProps}
-								/>
-							</AppLayout>
-						</BoardProvier>
-					</AuthProvider>
-				</RouterProvider>
-			</ApolloProvider>
-		)
-	}
+	return (
+		<ApolloProvider client={client}>
+			<RouterProvider>
+				<AuthProvider {...authRootStore.getStores()}>
+					<BoardProvier {...boardRootStore.getStores()}>
+						<AppLayout>
+							<Component
+								authViewModel={authRootStore.getStores('authModels').authModel}
+								client={client}
+								{...pageProps}
+							/>
+						</AppLayout>
+					</BoardProvier>
+				</AuthProvider>
+			</RouterProvider>
+		</ApolloProvider>
+	)
 }

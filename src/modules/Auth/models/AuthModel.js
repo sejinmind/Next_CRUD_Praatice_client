@@ -14,7 +14,6 @@ export class AuthModel {
 	}
 
 	handleSignIn = async (username, password) => {
-		// const result = await handleSignInAPI(username, password)
 		await axios({
 			url: 'https://www.mecallapi.com/api/login',
 			method: 'post',
