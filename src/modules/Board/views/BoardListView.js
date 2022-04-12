@@ -5,11 +5,13 @@ import { observer } from 'mobx-react'
 import Link from 'next/link'
 
 import { QuestionCircleOutlined } from '@ant-design/icons'
+import Search from 'components/Search'
 
 @observer
 export class BoardListView extends React.Component {
 	constructor(props) {
 		super(props)
+		this.state = { data: props.data }
 	}
 
 	render() {
@@ -40,25 +42,31 @@ export class BoardListView extends React.Component {
 				render: (text, record) => {
 					return (
 						<Space size="small">
-							<Link href={`board/show/${text._id}`}>수정</Link>
-							<Popconfirm
-								placement="rightTop"
-								title="정말 삭제하시겠습니까？"
-								okText="삭제"
-								cancelText="취소"
-								icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
-								onConfirm={() => this.props.deleteArticle(text._id)}>
-								<a>삭제</a>
-							</Popconfirm>
+							{text.author === this.props.auth.username ? (
+								<React.Fragment>
+									<Link href={`board/show/${text._id}`}>수정</Link>
+									<Popconfirm
+										placement="rightTop"
+										title="정말 삭제하시겠습니까？"
+										okText="삭제"
+										cancelText="취소"
+										icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
+										onConfirm={() => this.props.deleteArticle(text._id)}>
+										<a>삭제</a>
+									</Popconfirm>
+								</React.Fragment>
+							) : null}
 						</Space>
 					)
 				},
 			},
 		]
 		const { data } = this.props
+		const setState = this.setState.bind(this)
 		return (
 			<React.Fragment>
-				<Table columns={columns} dataSource={toJS(data)} rowKey="_id" />
+				<Search placeholder="검색해주세요" data={data} setData={setState} />
+				<Table columns={columns} dataSource={toJS(this.state.data)} rowKey="_id" />
 			</React.Fragment>
 		)
 	}
