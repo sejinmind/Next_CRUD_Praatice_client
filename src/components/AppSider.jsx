@@ -3,21 +3,19 @@ import { Layout, Menu, message } from 'antd'
 import { PieChartOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 import { AuthContext } from 'context/Auth'
-// import {} from 'modules/Auth/viewModel'
-const AppSider = () => {
+import { observer } from 'mobx-react-lite'
+
+const AppSider = observer(() => {
 	const Authcontext = React.useContext(AuthContext)
-	// console.log(Authcontext)
 	const [collapsed, setCollapsed] = React.useState(false)
-	const isLoggedIn = Authcontext.isLoggedIn
+	const { isLoggedIn, handleSignOut } = Authcontext
 
 	const onCollapse = () => {
 		setCollapsed(!collapsed)
 	}
-	const handleSignOut = () => {
-		message.loading('로그아웃중...', 0.5).then(() => {
-			message.success('로그아웃성공!', 2.5)
-		})
-		window.localStorage.removeItem('accessToken')
+	const SignOutAction = () => {
+		message.success('로그아웃성공!', 2.5)
+		handleSignOut()
 	}
 
 	return (
@@ -30,12 +28,10 @@ const AppSider = () => {
 				<Menu.SubMenu key="sub1" icon={<UserOutlined />} title="유저">
 					{isLoggedIn ? (
 						<React.Fragment>
-							<Menu.Item key="2" onClick={() => handleSignOut()}>
+							<Menu.Item key="2" onClick={() => SignOutAction()}>
 								로그아웃
 							</Menu.Item>
-							<Menu.Item key="3" onClick={() => handleSignOut()}>
-								마이페이지
-							</Menu.Item>
+							<Menu.Item key="3">마이페이지</Menu.Item>
 						</React.Fragment>
 					) : (
 						<React.Fragment>
@@ -57,5 +53,5 @@ const AppSider = () => {
 			</Menu>
 		</Layout.Sider>
 	)
-}
+})
 export default AppSider
