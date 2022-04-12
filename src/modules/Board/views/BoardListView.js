@@ -40,16 +40,20 @@ export class BoardListView extends React.Component {
 				render: (text, record) => {
 					return (
 						<Space size="small">
-							<Link href={`board/show/${text._id}`}>수정</Link>
-							<Popconfirm
-								placement="rightTop"
-								title="정말 삭제하시겠습니까？"
-								okText="삭제"
-								cancelText="취소"
-								icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
-								onConfirm={() => this.props.deleteArticle(text._id)}>
-								<a>삭제</a>
-							</Popconfirm>
+							{text.author === this.props.auth.username ? (
+								<React.Fragment>
+									<Link href={`board/show/${text._id}`}>수정</Link>
+									<Popconfirm
+										placement="rightTop"
+										title="정말 삭제하시겠습니까？"
+										okText="삭제"
+										cancelText="취소"
+										icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
+										onConfirm={() => this.props.deleteArticle(text._id)}>
+										<a>삭제</a>
+									</Popconfirm>
+								</React.Fragment>
+							) : null}
 						</Space>
 					)
 				},

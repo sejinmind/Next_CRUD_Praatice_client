@@ -8,10 +8,7 @@ import {
 export class BoardListModel {
 	constructor() {
 		this.boardList = []
-		this.loading = true
 		makeObservable(this, {
-			isLoadng: action,
-			loading: observable,
 			boardList: observable,
 			getBoardList: action,
 			getList: action,
@@ -21,7 +18,6 @@ export class BoardListModel {
 			deleteArticle: action,
 		})
 	}
-	isLoadng() {}
 	getList = (client) => {
 		const result = client.query({
 			query: GET_BOARD_LIST_QUERY,
@@ -69,11 +65,7 @@ export class BoardListModel {
 					isRemove: false,
 				},
 			})
-			console.log('before')
-			console.log(this.boardList)
 			this.boardList.push(result.data.addArticle)
-			console.log('after')
-			console.log(this.boardList)
 		} catch (error) {
 			console.log('Failed to getBoardList')
 			throw error
