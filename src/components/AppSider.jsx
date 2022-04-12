@@ -4,9 +4,9 @@ import { PieChartOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 import { AuthContext } from 'context/Auth'
 import { observer } from 'mobx-react-lite'
-
 const AppSider = observer(() => {
 	const Authcontext = React.useContext(AuthContext)
+	// console.log(Authcontext)
 	const [collapsed, setCollapsed] = React.useState(false)
 	const { isLoggedIn, handleSignOut } = Authcontext
 
@@ -31,7 +31,9 @@ const AppSider = observer(() => {
 							<Menu.Item key="2" onClick={() => SignOutAction()}>
 								로그아웃
 							</Menu.Item>
-							<Menu.Item key="3">마이페이지</Menu.Item>
+							<Menu.Item key="3" onClick={() => SignOutAction()}>
+								마이페이지
+							</Menu.Item>
 						</React.Fragment>
 					) : (
 						<React.Fragment>

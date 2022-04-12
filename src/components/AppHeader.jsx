@@ -5,6 +5,7 @@ import { Routes } from 'constant/Routes'
 import { AuthContext } from 'context'
 import styled from '@emotion/styled'
 import { observer } from 'mobx-react-lite'
+
 const AppHeader = observer(() => {
 	const [pageHeader, setPageHeader] = React.useState({
 		title: '',
@@ -58,6 +59,7 @@ const AppHeader = observer(() => {
 })
 
 export default AppHeader
+
 const LayoutHeader = styled(Layout.Header)`
 	.site-page-header {
 		padding: 12px 24px;
