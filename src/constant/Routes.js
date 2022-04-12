@@ -20,6 +20,11 @@ const Routes = [
 		title: '글 수정',
 		subTitle: '어떤글이었을까요..',
 	},
+	{
+		pathname: '/signIn',
+		title: '로그인',
+		subTitle: '로그인해라',
+	},
 ]
 
 export { Routes }
