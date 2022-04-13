@@ -1,5 +1,5 @@
 import * as React from 'react'
-import App from 'next/app'
+import Head from 'next/head'
 import 'styles/reset.css'
 import 'antd/dist/antd.min.css'
 import AppLayout from 'components/AppLayout'
@@ -22,20 +22,25 @@ export default function MyApp(props) {
 	const { Component, pageProps } = props
 
 	return (
-		<ApolloProvider client={client}>
-			<RouterProvider>
-				<AuthProvider {...authRootStore.getStores()}>
-					<BoardProvier {...boardRootStore.getStores()}>
-						<AppLayout>
-							<Component
-								authViewModel={authRootStore.getStores('authModels').authModel}
-								client={client}
-								{...pageProps}
-							/>
-						</AppLayout>
-					</BoardProvier>
-				</AuthProvider>
-			</RouterProvider>
-		</ApolloProvider>
+		<>
+			<Head>
+				<title>퀘스트 깨고 싶다</title>
+			</Head>
+			<ApolloProvider client={client}>
+				<RouterProvider>
+					<AuthProvider {...authRootStore.getStores()}>
+						<BoardProvier {...boardRootStore.getStores()}>
+							<AppLayout>
+								<Component
+									authViewModel={authRootStore.getStores('authModels').authModel}
+									client={client}
+									{...pageProps}
+								/>
+							</AppLayout>
+						</BoardProvier>
+					</AuthProvider>
+				</RouterProvider>
+			</ApolloProvider>
+		</>
 	)
 }

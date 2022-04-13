@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { BoardListViewController } from 'modules/Board/viewController'
+import { BoardDetailViewController } from 'modules/Board/viewController'
 import RootStore from '../store'
 import { BoardListViewModel } from '../viewmodel'
 import { BoardListModel } from '../models'
 // @inject(RootStore.type.TODO_MODEL)
-export class BoardListPage extends React.Component {
+export default class BoardListPage extends React.Component {
 	constructor(props) {
 		super(props)
 		// console.log(props)
@@ -13,6 +13,6 @@ export class BoardListPage extends React.Component {
 	}
 
 	render() {
-		return <React.Fragment />
+		return <BoardDetailViewController viewModel={this.viewModel} />
 	}
 }

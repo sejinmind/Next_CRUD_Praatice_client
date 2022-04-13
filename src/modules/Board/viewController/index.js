@@ -1,3 +1,3 @@
-export * from "./BoardDetailViewController";
-export * from "./BoardListViewController";
-export * from "./BoardCreateViewController";
+export * from './BoardDetailViewController'
+export * from './BoardListViewController'
+export * from './BoardCreateViewController'

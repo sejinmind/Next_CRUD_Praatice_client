@@ -2,6 +2,7 @@ import { observable, action, makeObservable, toJS } from 'mobx'
 import {
 	GET_BOARD_LIST_QUERY,
 	GET_BOARD_DETAIL_MUTATION,
+	GET_BOARD_DETAIL_QUERY,
 	ADD_ARTICLE_MUTATION,
 	DELETE_ARTICLE_MUTATION,
 } from '../shared'
@@ -37,19 +38,18 @@ export class BoardListModel {
 		}
 	}
 
-	getOne = (client) => {
+	getOne = (_id, client) => {
 		const result = client.query({
-			query: GET_BOARD_DETAIL_MUTATION,
+			query: GET_BOARD_DETAIL_QUERY,
+			variables: { _id },
 		})
 		return result
 	}
 
 	getBoardDetail = async (_id, client) => {
 		try {
-			this.getBoardList(client)
-			const result = toJS(this.boardList).filter((item) => item._id === _id)
-			console.log(result, _id)
-			return result
+			const result = await this.getOne(_id, client)
+			return result?.data?.getBoardDetail
 		} catch (error) {
 			console.log('Failed to getBoardList')
 			throw error

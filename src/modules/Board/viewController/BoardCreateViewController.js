@@ -4,7 +4,7 @@ import { message } from 'antd'
 import { BoardCreateView } from '../views'
 import { RouterContext, AuthContext } from 'context'
 import { toJS } from 'mobx'
-export default function BoardCreateViewController(props) {
+export default function BoardCreateViewController({ viewModel }) {
 	const authContext = React.useContext(AuthContext)
 	const routerContext = React.useContext(RouterContext)
 	const [state, setState] = React.useState({
@@ -17,7 +17,7 @@ export default function BoardCreateViewController(props) {
 		}
 	}, [authContext.user])
 	const onFinish = (values) => {
-		props.viewModel.addArticle(state)
+		viewModel.addArticle(state)
 		message.success('글 작성이 완료되었습니다!')
 	}
 	const onFinishFailed = () => {
@@ -30,13 +30,11 @@ export default function BoardCreateViewController(props) {
 		}
 	}
 
-	const getBoardDetail = (_id) => {
-		return props.viewModel.getBoardDetail(_id)
-	}
-	React.useEffect(() => {
+	React.useEffect(async () => {
 		const _id = routerContext.query.slug
 		if (typeof _id !== 'undefined') {
-			const result = getBoardDetail(_id)
+			const result = await viewModel.getBoardDetail(_id)
+			console.log(result)
 		}
 	}, [routerContext.query.slug])
 

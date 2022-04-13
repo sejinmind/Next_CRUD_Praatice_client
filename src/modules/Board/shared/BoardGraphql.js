@@ -12,9 +12,21 @@ export const GET_BOARD_LIST_QUERY = gql`
 	}
 `
 
+export const GET_BOARD_DETAIL_QUERY = gql`
+	query ($_id: String) {
+		getBoardDetail(_id: $_id) {
+			_id
+			author
+			title
+			created_at
+			isRemove
+		}
+	}
+`
+
 export const GET_BOARD_DETAIL_MUTATION = gql`
-	{
-		getBoardDetail {
+	mutation ($_id: String!) {
+		getBoardDetail(_id: $_id) {
 			_id
 			author
 			title

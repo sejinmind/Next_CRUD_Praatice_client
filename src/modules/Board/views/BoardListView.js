@@ -25,11 +25,13 @@ export class BoardListView extends React.Component {
 				title: '제목',
 				dataIndex: 'title',
 				key: 'title',
-				render: (text) => (
-					<Link href={`/board/show/[${1}]`} passHref>
-						{text}
-					</Link>
-				),
+				render: (text, record) => {
+					return (
+						<Link href={`/board/show/${record?._id}`} passHref>
+							{text}
+						</Link>
+					)
+				},
 			},
 			{
 				title: '작성일',
@@ -44,7 +46,7 @@ export class BoardListView extends React.Component {
 						<Space size="small">
 							{text.author === this.props.auth.username ? (
 								<React.Fragment>
-									<Link href={`board/show/${text._id}`}>수정</Link>
+									<Link href={`board/update/${text._id}`}>수정</Link>
 									<Popconfirm
 										placement="rightTop"
 										title="정말 삭제하시겠습니까？"
