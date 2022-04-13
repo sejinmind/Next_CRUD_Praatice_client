@@ -1,5 +1,5 @@
 import { observable, action, makeObservable, toJS } from 'mobx'
-import { handleSignIn as handleSignInAPI } from '../shared'
+import { message } from 'antd'
 import axios from 'axios'
 export class AuthModel {
 	constructor() {
@@ -30,8 +30,9 @@ export class AuthModel {
 			.catch((error) => {
 				if (error.response) {
 					const { response } = error
-					if (response.status >= 300) {
-						console.log(response)
+					// 예외 처리 더 하고싶은데... mecallAPI 너무 한정적이네,,,
+					if (response.status === 401) {
+						message.error('이메일 혹은 패스워드가 잘못되었습니다.', 1.0)
 					}
 				}
 			})
