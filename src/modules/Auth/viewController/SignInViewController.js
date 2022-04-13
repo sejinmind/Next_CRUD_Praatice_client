@@ -8,8 +8,8 @@ export const SignInViewController = ({ viewModel }) => {
 		username: '',
 		password: '',
 	})
-	const onFinish = (values) => {
-		console.log('Success:', values)
+	const onFinish = () => {
+		handleSignIn()
 	}
 
 	const handleSignIn = async () => {
