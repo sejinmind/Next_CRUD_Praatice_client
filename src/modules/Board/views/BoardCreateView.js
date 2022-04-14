@@ -5,14 +5,13 @@ export const BoardCreateView = (props) => {
 
 	const [form] = Form.useForm()
 
-	const { onFinish, onFinishFailed, onTitleChange, isLoggedIn, author, router } = props
-
+	const { onFinish, onFinishFailed, onTitleChange, isLoggedIn, state, router, isNew } = props
 	return (
 		<React.Fragment>
 			{isLoggedIn ? (
 				<Form
 					name="boardCreateForm"
-					size="middle"
+					size="large"
 					fields={fields}
 					onFieldsChange={(_, allFields) => {
 						setFields(allFields)
@@ -21,8 +20,13 @@ export const BoardCreateView = (props) => {
 					onFinishFailed={onFinishFailed}
 					form={form}>
 					<Form.Item label="작성자">
-						<Typography.Text keyboard>{author}</Typography.Text>
+						<Typography.Text keyboard>{state.author}</Typography.Text>
 					</Form.Item>
+					{isNew ? null : (
+						<Form.Item label="작성일자">
+							<Typography.Text mark>{state.created_at}</Typography.Text>
+						</Form.Item>
+					)}
 					<Form.Item required label={<React.Fragment>내용</React.Fragment>}>
 						<Input
 							showCount
@@ -30,11 +34,12 @@ export const BoardCreateView = (props) => {
 							onChange={onTitleChange}
 							style={{ minHeight: 100 }}
 							rules={[{ required: true }]}
+							value={isNew ? null : state.title}
 						/>
 					</Form.Item>
 					<Form.Item>
 						<Button type="primary" block onClick={onFinish}>
-							작성
+							{isNew ? '작성' : '수정'}
 						</Button>
 					</Form.Item>
 				</Form>

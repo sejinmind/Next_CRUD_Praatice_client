@@ -7,9 +7,7 @@ class MyDocument extends Document {
 	render() {
 		return (
 			<Html>
-				<Head>
-					<title>퀘스트 깨고 싶다</title>
-				</Head>
+				<Head></Head>
 				<body>
 					<Main />
 					<NextScript />

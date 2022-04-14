@@ -6,9 +6,9 @@ const Routes = [
 		subTitle: '누가 어떤 뻘글을 썼을까요?',
 	},
 	{
-		pathname: '/board/show',
+		pathname: '/board/show/[slug]',
 		title: '게시글 디테일',
-		subTitle: '누가 이런 뻘글을 썼을까요?',
+		subTitle: '무슨글일까..',
 	},
 	{
 		pathname: '/board/create',
@@ -16,7 +16,7 @@ const Routes = [
 		subTitle: '어떤 뻘글을 작성해보는 당사자가 되볼래요?',
 	},
 	{
-		pathname: '/board/show/',
+		pathname: '/board/update/[slug]',
 		title: '글 수정',
 		subTitle: '어떤글이었을까요..',
 	},

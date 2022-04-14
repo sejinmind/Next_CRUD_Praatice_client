@@ -15,6 +15,9 @@ export class BoardListViewModel {
 	addArticle = (state) => {
 		this.store.addArticle(state, this.apolloClient)
 	}
+	updateArticle = (_id, state) => {
+		this.store.updateArticle(_id, state, this.apolloClient)
+	}
 	deleteArticle = (_id) => {
 		this.store.deleteArticle(_id, this.apolloClient)
 	}

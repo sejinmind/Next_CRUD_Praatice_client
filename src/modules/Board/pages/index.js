@@ -1,3 +1,3 @@
-export * from "./BoardListPage";
-export * from "./BoardDetailPage";
-export * from "./BoardCreatePage";
+export * from './BoardListPage'
+export * from './BoardDetailPage'
+export * from './BoardCreatePage'

@@ -56,7 +56,7 @@ export const SignInView = ({ onFinish, handleSignIn, state, setState }) => {
 					span: 8,
 				}}>
 				<Button type="primary" block onClick={handleSignIn}>
-					저장
+					로그인
 				</Button>
 			</Form.Item>
 		</Form>

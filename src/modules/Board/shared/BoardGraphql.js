@@ -12,9 +12,9 @@ export const GET_BOARD_LIST_QUERY = gql`
 	}
 `
 
-export const GET_BOARD_DETAIL_MUTATION = gql`
-	{
-		getBoardDetail {
+export const GET_BOARD_DETAIL_QUERY = gql`
+	query ($_id: String) {
+		getBoardDetail(_id: $_id) {
 			_id
 			author
 			title
@@ -27,6 +27,16 @@ export const GET_BOARD_DETAIL_MUTATION = gql`
 export const ADD_ARTICLE_MUTATION = gql`
 	mutation ($author: String!, $title: String!, $isRemove: Boolean!) {
 		addArticle(author: $author, title: $title, isRemove: $isRemove) {
+			author
+			title
+			isRemove
+		}
+	}
+`
+
+export const UPDATE_ARTICLE_MUTATION = gql`
+	mutation ($_id: String!, $title: String!) {
+		updateArticle(_id: $_id, title: $title) {
 			author
 			title
 			isRemove
