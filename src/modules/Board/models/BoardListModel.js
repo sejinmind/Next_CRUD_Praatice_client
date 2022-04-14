@@ -1,9 +1,9 @@
 import { observable, action, makeObservable, toJS } from 'mobx'
 import {
 	GET_BOARD_LIST_QUERY,
-	GET_BOARD_DETAIL_MUTATION,
 	GET_BOARD_DETAIL_QUERY,
 	ADD_ARTICLE_MUTATION,
+	UPDATE_ARTICLE_MUTATION,
 	DELETE_ARTICLE_MUTATION,
 } from '../shared'
 export class BoardListModel {
@@ -67,7 +67,25 @@ export class BoardListModel {
 			})
 			this.boardList.push(result.data.addArticle)
 		} catch (error) {
-			console.log('Failed to getBoardList')
+			console.log('Failed to Add Article')
+			throw error
+		}
+	}
+	updateArticle = async (_id, state, client) => {
+		try {
+			const result = await client.mutate({
+				mutation: UPDATE_ARTICLE_MUTATION,
+				variables: {
+					_id,
+					title: state.title,
+				},
+			})
+			console.log(result)
+			// this.boardList.filter((list) => {
+			// 	list._id === _id
+			// })
+		} catch (error) {
+			console.log('Failed to Update Article')
 			throw error
 		}
 	}

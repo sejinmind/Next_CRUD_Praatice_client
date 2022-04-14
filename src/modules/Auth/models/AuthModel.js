@@ -13,6 +13,11 @@ export class AuthModel {
 		})
 	}
 
+	setUserData = (user) => {
+		this.isLoggedIn = true
+		this.user = user
+	}
+
 	handleSignIn = async (username, password) => {
 		await axios({
 			url: 'https://www.mecallapi.com/api/login',
@@ -24,6 +29,7 @@ export class AuthModel {
 		})
 			.then((response) => {
 				window.localStorage.setItem('accessToken', response.data.accessToken)
+				window.localStorage.setItem('user', JSON.stringify(response.data.user))
 				this.isLoggedIn = true
 				this.user = response.data.user
 			})
@@ -46,6 +52,7 @@ export class AuthModel {
 
 	handleSignOut = () => {
 		this.isLoggedIn = false
+		window.localStorage.removeItem('user')
 		window.localStorage.removeItem('accessToken')
 	}
 }

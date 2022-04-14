@@ -24,21 +24,19 @@ export const GET_BOARD_DETAIL_QUERY = gql`
 	}
 `
 
-export const GET_BOARD_DETAIL_MUTATION = gql`
-	mutation ($_id: String!) {
-		getBoardDetail(_id: $_id) {
-			_id
+export const ADD_ARTICLE_MUTATION = gql`
+	mutation ($author: String!, $title: String!, $isRemove: Boolean!) {
+		addArticle(author: $author, title: $title, isRemove: $isRemove) {
 			author
 			title
-			created_at
 			isRemove
 		}
 	}
 `
 
-export const ADD_ARTICLE_MUTATION = gql`
-	mutation ($author: String!, $title: String!, $isRemove: Boolean!) {
-		addArticle(author: $author, title: $title, isRemove: $isRemove) {
+export const UPDATE_ARTICLE_MUTATION = gql`
+	mutation ($_id: String!, $title: String!) {
+		updateArticle(_id: $_id, title: $title) {
 			author
 			title
 			isRemove
