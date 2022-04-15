@@ -73,17 +73,13 @@ export class BoardListModel {
 	}
 	updateArticle = async (_id, state, client) => {
 		try {
-			const result = await client.mutate({
+			await client.mutate({
 				mutation: UPDATE_ARTICLE_MUTATION,
 				variables: {
 					_id,
 					title: state.title,
 				},
 			})
-			console.log(result)
-			// this.boardList.filter((list) => {
-			// 	list._id === _id
-			// })
 		} catch (error) {
 			console.log('Failed to Update Article')
 			throw error

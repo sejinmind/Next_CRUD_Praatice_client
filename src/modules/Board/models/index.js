@@ -1,2 +1,1 @@
-export * from "./BoardListModel";
-export * from "./BoardActionModel";
+export * from './BoardListModel'

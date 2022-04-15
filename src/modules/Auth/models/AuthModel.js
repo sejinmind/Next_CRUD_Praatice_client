@@ -8,6 +8,7 @@ export class AuthModel {
 		makeObservable(this, {
 			user: observable,
 			isLoggedIn: observable,
+			setUserData: action,
 			handleSignIn: action,
 			handleSignOut: action,
 		})
