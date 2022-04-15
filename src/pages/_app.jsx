@@ -31,11 +31,7 @@ export default function MyApp(props) {
 					<AuthProvider {...authRootStore.getStores()}>
 						<BoardProvier {...boardRootStore.getStores()}>
 							<AppLayout>
-								<Component
-									authViewModel={authRootStore.getStores('authModels').authModel}
-									client={client}
-									{...pageProps}
-								/>
+								<Component client={client} {...pageProps} />
 							</AppLayout>
 						</BoardProvier>
 					</AuthProvider>
